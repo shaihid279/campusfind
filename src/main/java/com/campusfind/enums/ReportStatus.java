@@ -1,4 +1,5 @@
 package com.campusfind.enums;
 
-public class ReportStatus {
+public enum ReportStatus {
+    PENDING, REVIEWED, DISMISSED
 }

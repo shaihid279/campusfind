@@ -1,4 +1,5 @@
 package com.campusfind.enums;
 
-public class ItemStatus {
+public enum ItemStatus {
+    PENDING, APPROVED, ACTIVE, POSSIBLE_MATCH, CLAIMED, RETURNED, CLOSED
 }

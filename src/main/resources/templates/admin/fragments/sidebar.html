@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<div th:fragment="sidebar">
+    <h5 class="text-white mb-4">CampusFind Admin</h5>
+    <ul class="nav flex-column">
+        <li class="nav-item"><a class="nav-link text-white" th:href="@{/admin}">Dashboard</a></li>
+        <li class="nav-item"><a class="nav-link text-white" th:href="@{/admin/users}">Users</a></li>
+        <li class="nav-item"><a class="nav-link text-white" th:href="@{/admin/items}">Items</a></li>
+        <li class="nav-item"><a class="nav-link text-white" th:href="@{/admin/claims}">Claims</a></li>
+        <li class="nav-item"><a class="nav-link text-white" th:href="@{/admin/categories}">Categories</a></li>
+        <li class="nav-item"><a class="nav-link text-white" th:href="@{/admin/logs}">Activity Logs</a></li>
+        <li class="nav-item mt-3">
+            <form th:action="@{/logout}" method="post">
+                <button type="submit" class="btn btn-outline-light btn-sm w-100">Logout</button>
+            </form>
+        </li>
+    </ul>
+</div>
+</body>
+</html>

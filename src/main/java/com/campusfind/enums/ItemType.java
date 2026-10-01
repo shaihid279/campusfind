@@ -1,4 +1,5 @@
 package com.campusfind.enums;
 
-public class ItemType {
+public enum ItemType {
+    LOST, FOUND
 }

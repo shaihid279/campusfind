@@ -1,4 +1,5 @@
 package com.campusfind.enums;
 
-public class NotificationType {
+public enum NotificationType {
+    MATCH, CLAIM_UPDATE, ITEM_APPROVED, RECOVERED, SYSTEM
 }
