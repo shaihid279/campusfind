@@ -21,13 +21,16 @@ public class ItemService {
     private final CategoryRepository categoryRepository;
     private final ItemCodeGenerator itemCodeGenerator;
     private final MatchingService matchingService;
+    private final FileStorageService fileStorageService;
 
     public ItemService(ItemRepository itemRepository, CategoryRepository categoryRepository,
-                       ItemCodeGenerator itemCodeGenerator, MatchingService matchingService) {
+                       ItemCodeGenerator itemCodeGenerator, MatchingService matchingService,
+                       FileStorageService fileStorageService) {
         this.itemRepository = itemRepository;
         this.categoryRepository = categoryRepository;
         this.itemCodeGenerator = itemCodeGenerator;
         this.matchingService = matchingService;
+        this.fileStorageService = fileStorageService;
     }
 
     public Item createItem(ItemCreateRequest request, ItemType type, User reporter) {
@@ -49,6 +52,9 @@ public class ItemService {
         item.setStorageLocation(request.getStorageLocation());
         item.setStatus(ItemStatus.ACTIVE);
         item.setUser(reporter);
+
+        String imageUrl = fileStorageService.store(request.getImage(), "items");
+        item.setImageUrl(imageUrl);
 
         Item saved = itemRepository.save(item);
         matchingService.findAndSaveMatches(saved);

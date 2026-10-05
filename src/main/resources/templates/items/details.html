@@ -14,6 +14,7 @@
         <div class="col-md-8">
             <div class="card shadow-sm">
                 <div class="card-body p-4">
+                    <img th:if="${item.imageUrl}" th:src="@{${item.imageUrl}}" class="img-fluid rounded mb-3" style="max-height:350px;width:100%;object-fit:cover;">
                     <span class="badge mb-2" th:classappend="${item.itemType.name() == 'LOST'} ? 'bg-danger' : 'bg-success'"
                           th:text="${item.itemType}"></span>
                     <span class="badge bg-secondary mb-2" th:text="${item.status}"></span>

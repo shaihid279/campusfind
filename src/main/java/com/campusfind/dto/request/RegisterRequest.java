@@ -5,6 +5,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.web.multipart.MultipartFile;
 
 @Getter
 @Setter
@@ -21,9 +22,7 @@ public class RegisterRequest {
     private String collegeId;
 
     private String department;
-
     private String year;
-
     private String phone;
 
     @NotBlank(message = "Password is required")
@@ -32,4 +31,6 @@ public class RegisterRequest {
 
     @NotBlank(message = "Please confirm your password")
     private String confirmPassword;
+
+    private MultipartFile photo;
 }

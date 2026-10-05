@@ -55,6 +55,8 @@ public class User {
 
     @Column(nullable = false)
     private boolean enabled = true;
+    @Column(name = "profile_photo_url", length = 255)
+    private String profilePhotoUrl;
 
     @Column(name = "created_at", nullable = false, updatable = false)
     private LocalDateTime createdAt;

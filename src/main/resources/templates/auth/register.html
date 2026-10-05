@@ -18,6 +18,7 @@
                     <div th:if="${errorMessage}" class="alert alert-danger" th:text="${errorMessage}"></div>
 
                     <form th:action="@{/register}" th:object="${registerRequest}" method="post">
+                        <form th:action="@{/register}" th:object="${registerRequest}" method="post" enctype="multipart/form-data">
 
                         <div class="mb-3">
                             <label class="form-label">Full Name</label>
@@ -64,7 +65,10 @@
                             <input type="password" class="form-control" th:field="*{confirmPassword}">
                             <div class="text-danger small" th:if="${#fields.hasErrors('confirmPassword')}" th:errors="*{confirmPassword}"></div>
                         </div>
-
+                            <div class="mb-3">
+                                <label class="form-label">Profile Photo (optional)</label>
+                                <input type="file" name="photo" class="form-control" accept="image/*">
+                            </div>
                         <button type="submit" class="btn btn-primary w-100">Register</button>
                     </form>
 

@@ -16,8 +16,7 @@
                 <div class="card-body p-4">
                     <h3 class="mb-4">Report a Lost Item</h3>
 
-                    <form th:action="@{/items/report-lost}" th:object="${itemRequest}" method="post">
-
+                    <form th:action="@{/items/report-lost}" th:object="${itemRequest}" method="post" enctype="multipart/form-data">
                         <div class="mb-3">
                             <label class="form-label">Item Name</label>
                             <input type="text" class="form-control" th:field="*{title}">
@@ -76,7 +75,10 @@
                             <label class="form-label">Additional Information</label>
                             <textarea class="form-control" rows="2" th:field="*{additionalInformation}"></textarea>
                         </div>
-
+                        <div class="mb-3">
+                            <label class="form-label">Item Photo (optional)</label>
+                            <input type="file" name="image" class="form-control" accept="image/*">
+                        </div>
                         <button type="submit" class="btn btn-danger w-100">Submit Lost Item Report</button>
                     </form>
                 </div>

@@ -12,10 +12,13 @@ public class UserService {
 
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
+    private final FileStorageService fileStorageService;
 
-    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
+    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder,
+                       FileStorageService fileStorageService) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
+        this.fileStorageService = fileStorageService;
     }
 
     public void registerUser(RegisterRequest request) {
@@ -42,6 +45,9 @@ public class UserService {
         user.setPassword(passwordEncoder.encode(request.getPassword()));
         user.setRole(Role.STUDENT);
         user.setEnabled(true);
+
+        String photoUrl = fileStorageService.store(request.getPhoto(), "profiles");
+        user.setProfilePhotoUrl(photoUrl);
 
         userRepository.save(user);
     }

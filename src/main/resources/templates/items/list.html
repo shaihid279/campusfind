@@ -27,7 +27,9 @@
     <div class="row g-4" th:if="${not #lists.isEmpty(items)}">
         <div class="col-md-4" th:each="item : ${items}">
             <div class="card h-100 shadow-sm">
+                <img th:if="${item.imageUrl}" th:src="@{${item.imageUrl}}" class="card-img-top" style="height:160px;object-fit:cover;">
                 <div class="card-body">
+
                     <span class="badge mb-2" th:classappend="${item.itemType.name() == 'LOST'} ? 'bg-danger' : 'bg-success'"
                           th:text="${item.itemType}"></span>
                     <h5 class="card-title" th:text="${item.title}"></h5>

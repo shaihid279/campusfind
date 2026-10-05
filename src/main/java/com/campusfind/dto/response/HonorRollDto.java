@@ -11,6 +11,7 @@ public class HonorRollDto {
     private Long userId;
     private String fullName;
     private String department;
+    private String photoUrl;
     private double averageRating;
     private long totalReturns;
 }

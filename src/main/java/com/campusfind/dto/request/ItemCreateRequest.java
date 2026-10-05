@@ -4,6 +4,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -33,4 +34,5 @@ public class ItemCreateRequest {
     private String identifyingFeatures;
     private String storageLocation;
     private String additionalInformation;
+    private MultipartFile image;
 }

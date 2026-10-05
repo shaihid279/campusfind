@@ -69,7 +69,7 @@ public class RatingService {
                     List<FinderRating> ratings = e.getValue();
                     double avg = ratings.stream().mapToInt(FinderRating::getRating).average().orElse(0);
                     return new HonorRollDto(finder.getId(), finder.getFullName(), finder.getDepartment(),
-                            Math.round(avg * 10) / 10.0, ratings.size());
+                            finder.getProfilePhotoUrl(), Math.round(avg * 10) / 10.0, ratings.size());
                 })
                 .sorted(Comparator.comparingDouble(HonorRollDto::getAverageRating).reversed()
                         .thenComparing(Comparator.comparingLong(HonorRollDto::getTotalReturns).reversed()))
