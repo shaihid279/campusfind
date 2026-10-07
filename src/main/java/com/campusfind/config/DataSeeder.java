@@ -35,6 +35,7 @@ public class DataSeeder implements CommandLineRunner {
     @Override
     public void run(String... args) {
         seedCategories();
+        ensureAdminAccount();
         seedUsers();
         seedItems();
     }
@@ -50,18 +51,24 @@ public class DataSeeder implements CommandLineRunner {
         }
     }
 
-    private void seedUsers() {
-        if (userRepository.count() > 0) return;
+    /** Runs on every startup — makes sure the fixed admin account always exists. */
+    private void ensureAdminAccount() {
+        String adminEmail = "admin@pdvvpcoe.edu";
+        if (userRepository.existsByEmail(adminEmail)) return;
 
         User admin = new User();
-        admin.setFullName("System Admin");
-        admin.setEmail("admin@abccollege.edu");
-        admin.setCollegeId("ADMIN001");
+        admin.setFullName("System Administrator");
+        admin.setEmail(adminEmail);
+        admin.setCollegeId("ADMIN2026");
         admin.setDepartment("Administration");
-        admin.setPassword(passwordEncoder.encode("admin123"));
+        admin.setPassword(passwordEncoder.encode("Admin@2026"));
         admin.setRole(Role.ADMIN);
         admin.setEnabled(true);
         userRepository.save(admin);
+    }
+
+    private void seedUsers() {
+        if (userRepository.count() > 1) return; // admin already exists; only seed demo users once
 
         User staff = new User();
         staff.setFullName("Campus Staff");

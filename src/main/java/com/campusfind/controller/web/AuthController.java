@@ -50,4 +50,9 @@ public class AuthController {
     public String showLoginForm() {
         return "auth/login";
     }
+
+    @GetMapping("/admin/login")
+    public String showAdminLoginForm() {
+        return "auth/admin-login";
+    }
 }
