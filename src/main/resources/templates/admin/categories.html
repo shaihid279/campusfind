@@ -8,17 +8,29 @@
 <body class="bg-light">
 <div class="container-fluid">
     <div class="row">
-        <nav class="col-md-2 bg-dark min-vh-100 p-3" th:replace="~{admin/fragments/sidebar :: sidebar}"></nav>
+        <nav class="col-md-2 bg-dark min-vh-100 p-3">
+            <h5 class="text-white mb-4">CampusFind Admin</h5>
+            <ul class="nav flex-column">
+                <li class="nav-item"><a class="nav-link text-white" th:href="@{/admin}">Dashboard</a></li>
+                <li class="nav-item"><a class="nav-link text-white" th:href="@{/admin/users}">Users</a></li>
+                <li class="nav-item"><a class="nav-link text-white" th:href="@{/admin/items}">Items</a></li>
+                <li class="nav-item"><a class="nav-link text-white" th:href="@{/admin/claims}">Claims</a></li>
+                <li class="nav-item"><a class="nav-link text-white" th:href="@{/admin/categories}">Categories</a></li>
+                <li class="nav-item"><a class="nav-link text-white" th:href="@{/admin/logs}">Activity Logs</a></li>
+                <li class="nav-item mt-3">
+                    <form th:action="@{/logout}" method="post">
+                        <button type="submit" class="btn btn-outline-light btn-sm w-100">Logout</button>
+                    </form>
+                </li>
+            </ul>
+        </nav>
         <main class="col-md-10 py-4">
             <h2 class="mb-4">Manage Categories</h2>
-
             <div th:if="${errorMessage}" class="alert alert-danger" th:text="${errorMessage}"></div>
-
             <form th:action="@{/admin/categories/add}" method="post" class="d-flex gap-2 mb-4" style="max-width: 400px;">
                 <input type="text" name="name" class="form-control" placeholder="New category name" required>
                 <button type="submit" class="btn btn-primary">Add</button>
             </form>
-
             <table class="table table-bordered bg-white" style="max-width: 500px;">
                 <thead><tr><th>Name</th><th>Action</th></tr></thead>
                 <tbody>

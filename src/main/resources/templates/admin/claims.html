@@ -8,17 +8,30 @@
 <body class="bg-light">
 <div class="container-fluid">
     <div class="row">
-        <nav class="col-md-2 bg-dark min-vh-100 p-3" th:replace="~{admin/fragments/sidebar :: sidebar}"></nav>
+        <nav class="col-md-2 bg-dark min-vh-100 p-3">
+            <h5 class="text-white mb-4">CampusFind Admin</h5>
+            <ul class="nav flex-column">
+                <li class="nav-item"><a class="nav-link text-white" th:href="@{/admin}">Dashboard</a></li>
+                <li class="nav-item"><a class="nav-link text-white" th:href="@{/admin/users}">Users</a></li>
+                <li class="nav-item"><a class="nav-link text-white" th:href="@{/admin/items}">Items</a></li>
+                <li class="nav-item"><a class="nav-link text-white" th:href="@{/admin/claims}">Claims</a></li>
+                <li class="nav-item"><a class="nav-link text-white" th:href="@{/admin/categories}">Categories</a></li>
+                <li class="nav-item"><a class="nav-link text-white" th:href="@{/admin/logs}">Activity Logs</a></li>
+                <li class="nav-item mt-3">
+                    <form th:action="@{/logout}" method="post">
+                        <button type="submit" class="btn btn-outline-light btn-sm w-100">Logout</button>
+                    </form>
+                </li>
+            </ul>
+        </nav>
         <main class="col-md-10 py-4">
             <h2 class="mb-4">Review Claims</h2>
-
             <div class="card mb-3 shadow-sm" th:each="c : ${claims}">
                 <div class="card-body">
                     <h5 th:text="${c.item.title} + ' — ' + ${c.item.uniqueItemCode}"></h5>
                     <p class="text-muted mb-1" th:text="'Claimant: ' + ${c.claimant.fullName}"></p>
                     <p class="mb-2" style="white-space: pre-line;" th:text="${c.proofDescription}"></p>
                     <span class="badge bg-warning text-dark mb-2" th:text="${c.status}"></span>
-
                     <div class="d-flex gap-2 mt-2">
                         <form th:action="@{/admin/claims/{id}/under-review(id=${c.id})}" method="post" th:if="${c.status.name() == 'PENDING'}">
                             <button type="submit" class="btn btn-sm btn-outline-secondary">Mark Under Review</button>
@@ -34,7 +47,6 @@
                     </div>
                 </div>
             </div>
-
             <p th:if="${#lists.isEmpty(claims)}" class="text-muted">No pending claims.</p>
         </main>
     </div>
