@@ -1,5 +1,6 @@
 package com.campusfind.service;
 
+import com.campusfind.dto.request.ProfileUpdateRequest;
 import com.campusfind.dto.request.RegisterRequest;
 import com.campusfind.entity.User;
 import com.campusfind.enums.Role;
@@ -48,6 +49,23 @@ public class UserService {
 
         String photoUrl = fileStorageService.store(request.getPhoto(), "profiles");
         user.setProfilePhotoUrl(photoUrl);
+
+        userRepository.save(user);
+    }
+
+    public void updateProfile(Long userId, ProfileUpdateRequest request) {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new IllegalArgumentException("User not found."));
+
+        user.setFullName(request.getFullName().trim());
+        user.setDepartment(request.getDepartment());
+        user.setYear(request.getYear());
+        user.setPhone(request.getPhone());
+
+        if (request.getPhoto() != null && !request.getPhoto().isEmpty()) {
+            String photoUrl = fileStorageService.store(request.getPhoto(), "profiles");
+            user.setProfilePhotoUrl(photoUrl);
+        }
 
         userRepository.save(user);
     }
